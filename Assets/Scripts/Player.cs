@@ -236,6 +236,7 @@ public class Player : MonoBehaviour
         if(collision.gameObject.tag == "quickSand")
         {
             speed *= 0.25f;
+            rb.mass *= 100f;
         }
     }
     IEnumerator Trampoline_anim(Animator an)
@@ -294,5 +295,13 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(time);
         if (spr.color.a > 0)
             StartCoroutine(Invisible(spr, time));
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "quickSand")
+        {
+            speed *= 4f;
+            rb.mass *= 0.01f;
+        }
     }
 }
